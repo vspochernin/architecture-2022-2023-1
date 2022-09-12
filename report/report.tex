@@ -177,24 +177,35 @@
 		\item Отказ заявке или выбивание её при отсутствии свободных мест в БП.
 		\item Функционирование дисциплины выбора заявок из буфера и дисциплины выбора приборов.
 	\end{itemize}
-	Пусть наша система будет состоять из 3 источников (И1, И2, И3), 2 позиций в буфере (Б1, Б2, Б2) и 2 приборов (П1, П2). Получим следующую диаграмму:
+	Пусть наша система будет состоять из 3 источников (И1, И2, И3), 2 позиций в буфере (Б1, Б2) и 2 приборов (П1, П2). Получим следующую диаграмму:
 
 	\begin{tikztimingtable}
-		И1 				& L G L L L L L G L L L L L L L L L L L L L L L L L L L L L\\
-		И2 				& L L L G L     L     L     G     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L\\
-		И3 				& L     L     L     L     L     G     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L\\
-		Б1 				& L     G     L     L     L     G     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L\\
-		Б2 				& L     L     L     G     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L\\
-		П1 				& L     7D{1} L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L\\
-		П2 				& L     L     L     7D{2} L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L\\
+		И1 				& L G L L L L L L L L L L G L L L L L L L L L L L L L L L L L L L\\
+		И2 				& L L L G L L L L L L G L L L L G L L L L L L L L L L L L L L L L L\\
+		И3 				& L L L L L G L L G L L L L L L L L L L L L L L L L L L L L L L L\\
+		П1 				& L 14D{1} 15D{2}\\
+		П2 				& L L L 12D{2} L L 13D{1}\\
+		П3 				& L L L L L 10D{3} L L L L 11D{2}\\
+		Б1 				& L G L L L L L L G L L L L L L G L L G L L L L L L L L L L L L L L L\\
+		Б2 				& L L L G L L L L L L G L L L L L L L L L L G L L L L L L L L L L L\\
+		Б3 				& L L L L L G L L L L L L G L L L L L L G L L L L L L L L L L L L L\\
 		\\
-		Постановка      & L     G     L     G     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L\\
-		Изъятие         & L     G     L     G     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L     L\\
+		Постановка      & L G L L G L L G L L G L L G L L G L L G L L L L L L L L L L L L L L L L L\\
+		Изъятие         & L G L L G L L G L L L L L L L L L L G L L G L L G L L L L L L L L L L L\\
 		\extracode
 		\tablerules
 		\begin{pgfonlayer}{background}
 		\end{pgfonlayer}
 	\end{tikztimingtable}
+
+	\begin{itemize}
+		\item Вначале мы видим, как 3 заявки поочереди создаются на приборах с первого по третий и, проходя через буфер (заходя туда по кольцу), моментально оказываются на приборах (куда они также попадают по кольцу).
+		\item Затем, опять по правилу кольца, заявки с источников 3, 2 и 1 попадают на буферы 1, 2 и 3, в то время, как первые 3 заявки продолжают обрабатываться приборами, следовательно, у нас происходит заполнение буферной памяти.
+		\item Внезапно, источник И2 генерирует еще одну заявку, но в буфере уже заполнены места, поэтому, приходится применять дисциплину отказа - самая старая в буфере. Заявка в буфере Б1 от источника И3, являясь самой старой, выбивается из буфера новоиспеченной заявкой от И2.
+		\item Далее, по стечению обстоятельств, все три прибора одновременно заканчивают работу над своими заявками, благодаря чему мы можем увидеть работу дисциплин выбора заявок из буфера и выбора приборов. Так, как мы имеем выбор из буфера LIFO, сначала пойдет заявка с Б1, затем с Б3 и только потом Б2. Приборы же, продолжая выбираться по кольцу, возьмут заявки в порядке П1, П2, П3, так как последним прибором, взявшим заявку был П3.
+	\end{itemize}
+
+	\newpage
 
 	\subsection{Краткие ответы на контрольные вопросы задания}
 
