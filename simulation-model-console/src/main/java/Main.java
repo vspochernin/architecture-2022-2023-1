@@ -2,8 +2,10 @@ import java.util.Scanner;
 
 import data.SimulationResult;
 
+import static utils.Menu.showAutoResults;
 import static utils.Menu.showHelp;
 import static utils.Menu.showIncorrectCommandMessage;
+import static utils.Menu.showStepResults;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,7 +14,6 @@ public class Main {
         SimulationResult simulationResult = null;
 
         showHelp();
-
         while (true) {
             System.out.println("Введите комманду: ");
             command = scanner.nextLine();
@@ -22,19 +23,26 @@ public class Main {
             } else if (command.equals("simulate")) {
                 System.out.println("Просимулировали систему.");
                 simulationResult = utils.Utils.getTestSimulationResult();
-                // TODO.
             } else if (command.equals("auto")) {
-                System.out.println("Получили таблички авто-режима после симуляции.");
-                // TODO.
+                if (simulationResult == null) {
+                    System.out.println("Результаты еще не готовы.");
+                } else {
+                    showAutoResults(simulationResult);
+                }
             } else if (command.startsWith("step")) {
                 String[] parts = command.split(" ");
                 if (parts.length != 2) {
                     showIncorrectCommandMessage();
+                } else if (simulationResult == null) {
+                    System.out.println("Результаты еще не готовы.");
                 } else {
                     try {
                         int n = Integer.parseInt(parts[1]);
-                        System.out.println("Вывели " + n + "-й шаг.");
-                        // TODO.
+                        if (n < 0 || n >= simulationResult.getSteps().size()) {
+                            System.out.println("Такой шаг не существует");
+                        } else {
+                            showStepResults(simulationResult, n);
+                        }
                     } catch (NumberFormatException e) {
                         showIncorrectCommandMessage();
                     }
