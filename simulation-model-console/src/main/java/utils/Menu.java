@@ -59,7 +59,7 @@ public class Menu {
         calendarAndStateTable.addRow("Event", "Time", "Request count", "Failure count");
         calendarAndStateTable.addRule();
         for (CalendarAndStateTableRow row : stepData.getCalendarAndStateTableRows()) {
-            calendarAndStateTable.addRow(row.getEvent(), row.getTime(), row.getRequestCount(), row.getRequestCount());
+            calendarAndStateTable.addRow(row.getEvent(), row.getTime(), row.getRequestCount(), row.getFailureCount());
             calendarAndStateTable.addRule();
         }
 
