@@ -2,10 +2,11 @@ import java.util.Scanner;
 
 import data.SimulationResult;
 
-import static utils.Menu.showAutoResults;
-import static utils.Menu.showHelp;
-import static utils.Menu.showIncorrectCommandMessage;
-import static utils.Menu.showStepResults;
+import static utils.Interface.getTestSimulationResult;
+import static utils.Interface.showAutoResults;
+import static utils.Interface.showHelp;
+import static utils.Interface.showIncorrectCommandMessage;
+import static utils.Interface.showStepResults;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,7 +23,7 @@ public class Main {
                 showHelp();
             } else if (command.equals("simulate")) {
                 System.out.println("Просимулировали систему.");
-                simulationResult = utils.Utils.getTestSimulationResult();
+                simulationResult = getTestSimulationResult();
             } else if (command.equals("auto")) {
                 if (simulationResult == null) {
                     System.out.println("Результаты еще не готовы.");
