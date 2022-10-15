@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import data.SimulationResult;
+
 import static utils.Menu.showHelp;
 import static utils.Menu.showIncorrectCommandMessage;
 
@@ -7,6 +9,7 @@ public class Main {
     public static void main(String[] args) {
         String command;
         Scanner scanner = new Scanner(System.in);
+        SimulationResult simulationResult = null;
 
         showHelp();
 
@@ -18,6 +21,7 @@ public class Main {
                 showHelp();
             } else if (command.equals("simulate")) {
                 System.out.println("Просимулировали систему.");
+                simulationResult = utils.Utils.getTestSimulationResult();
                 // TODO.
             } else if (command.equals("auto")) {
                 System.out.println("Получили таблички авто-режима после симуляции.");
