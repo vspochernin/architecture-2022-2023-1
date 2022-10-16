@@ -2,13 +2,14 @@ import java.util.Scanner;
 
 import data.SimulationResult;
 
-import static utils.Interface.getTestSimulationResult;
-import static utils.Interface.showAutoResults;
-import static utils.Interface.showHelp;
-import static utils.Interface.showIncorrectCommandMessage;
-import static utils.Interface.showStepResults;
+import static utils.UI.getTestSimulationResult;
+import static utils.UI.showAutoResults;
+import static utils.UI.showHelp;
+import static utils.UI.showIncorrectCommandMessage;
+import static utils.UI.showStepResults;
 
 public class Main {
+
     public static void main(String[] args) {
         String command;
         Scanner scanner = new Scanner(System.in);
@@ -22,8 +23,10 @@ public class Main {
             if (command.equals("help")) {
                 showHelp();
             } else if (command.equals("simulate")) {
-                System.out.println("Просимулировали систему.");
+                // TODO: Валидация данных из конфиг файла.
+                // TODO: Симуляция системы.
                 simulationResult = getTestSimulationResult();
+                System.out.println("Система успешно просимулирована.");
             } else if (command.equals("auto")) {
                 if (simulationResult == null) {
                     System.out.println("Результаты еще не готовы.");

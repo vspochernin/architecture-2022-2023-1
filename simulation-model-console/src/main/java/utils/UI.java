@@ -10,7 +10,8 @@ import data.SimulationResult;
 import data.StepData;
 import de.vandermeer.asciitable.AsciiTable;
 
-public class Interface {
+public class UI {
+
     public static void showHelp() {
         System.out.println("Доступные команды:");
         System.out.println("help - показать помощь");
@@ -27,22 +28,39 @@ public class Interface {
     public static void showAutoResults(SimulationResult simulation) {
         AsciiTable inputCharacteristicsTable = new AsciiTable();
         inputCharacteristicsTable.addRule();
-        inputCharacteristicsTable.addRow("Input №", "Request №", "p failure", "T stay", "T buffer", "T " +
-                "service", "V buffer", "V service");
+        inputCharacteristicsTable.addRow(
+                "Input №",
+                "Request Count",
+                "p failure",
+                "T stay",
+                "T buffer",
+                "T service",
+                "V buffer",
+                "V service");
         inputCharacteristicsTable.addRule();
         for (InputCharacteristicTableRow row : simulation.getInputCharacteristicTableRows()) {
-            inputCharacteristicsTable.addRow(row.getNumber(), row.getCountOfRequests(), row.getFailureProbability(),
-                    row.getStayTime(), row.getBufferTime(), row.getServiceTime(), row.getBufferVariance(),
+            inputCharacteristicsTable.addRow(
+                    row.getNumber(),
+                    row.getCountOfRequests(),
+                    row.getFailureProbability(),
+                    row.getStayTime(),
+                    row.getBufferTime(),
+                    row.getServiceTime(),
+                    row.getBufferVariance(),
                     row.getServiceVariance());
             inputCharacteristicsTable.addRule();
         }
 
         AsciiTable deviceCharacteristicsTable = new AsciiTable();
         deviceCharacteristicsTable.addRule();
-        deviceCharacteristicsTable.addRow("Device №", "Utilization Rate");
+        deviceCharacteristicsTable.addRow(
+                "Device №",
+                "Utilization Rate");
         deviceCharacteristicsTable.addRule();
         for (DeviceCharacteristicTableRow row : simulation.getDeviceCharacteristicTableRows()) {
-            deviceCharacteristicsTable.addRow(row.getNumber(), row.getUtilizationRate());
+            deviceCharacteristicsTable.addRow(
+                    row.getNumber(),
+                    row.getUtilizationRate());
             deviceCharacteristicsTable.addRule();
         }
 
@@ -58,19 +76,35 @@ public class Interface {
 
         AsciiTable calendarAndStateTable = new AsciiTable();
         calendarAndStateTable.addRule();
-        calendarAndStateTable.addRow("Event", "Time", "Request count", "Failure count");
+        calendarAndStateTable.addRow(
+                "Event",
+                "Time",
+                "Request count",
+                "Failure count");
         calendarAndStateTable.addRule();
         for (CalendarAndStateTableRow row : stepData.getCalendarAndStateTableRows()) {
-            calendarAndStateTable.addRow(row.getEvent(), row.getTime(), row.getRequestCount(), row.getFailureCount());
+            calendarAndStateTable.addRow(
+                    row.getEvent(),
+                    row.getTime(),
+                    (row.getRequestCount() != -1) ? row.getRequestCount() : "",
+                    (row.getFailureCount() != -1) ? row.getFailureCount() : "");
             calendarAndStateTable.addRule();
         }
 
         AsciiTable bufferTable = new AsciiTable();
         bufferTable.addRule();
-        bufferTable.addRow("Position", "Registration time", "Input number", "Request number");
+        bufferTable.addRow(
+                "Position",
+                "Registration time",
+                "Input number",
+                "Request number");
+        bufferTable.addRule();
         for (BufferTableRow row : stepData.getBufferTableRows()) {
-            bufferTable.addRow(row.getPosition(), row.getRegistrationTime(), row.getInputNumber(),
-                    row.getRequestNumber());
+            bufferTable.addRow(
+                    row.getPosition(),
+                    (row.getRegistrationTime() != -1) ? row.getRegistrationTime() : "",
+                    (row.getInputNumber() != -1) ? row.getInputNumber() : "",
+                    (row.getRequestNumber() != -1) ? row.getRequestNumber() : "");
             bufferTable.addRule();
         }
 
@@ -109,25 +143,25 @@ public class Interface {
                                                 .event("D1")
                                                 .time(0.0)
                                                 .requestCount(0)
-                                                .failureCount(0)
+                                                .failureCount(-1)
                                                 .build(),
                                         CalendarAndStateTableRow.builder()
                                                 .event("D2")
                                                 .time(0.0)
                                                 .requestCount(0)
-                                                .failureCount(0)
+                                                .failureCount(-1)
                                                 .build(),
                                         CalendarAndStateTableRow.builder()
                                                 .event("D3")
                                                 .time(0.0)
                                                 .requestCount(0)
-                                                .failureCount(0)
+                                                .failureCount(-1)
                                                 .build(),
                                         CalendarAndStateTableRow.builder()
                                                 .event("End of simulate")
                                                 .time(999.0)
-                                                .requestCount(0)
-                                                .failureCount(0)
+                                                .requestCount(-1)
+                                                .failureCount(-1)
                                                 .build()
                                 ))
                                 .bufferTableRows(List.of(
@@ -139,9 +173,9 @@ public class Interface {
                                                 .build(),
                                         BufferTableRow.builder()
                                                 .position(2)
-                                                .registrationTime(3.2)
-                                                .inputNumber(4)
-                                                .requestNumber(5)
+                                                .registrationTime(-1)
+                                                .inputNumber(-1)
+                                                .requestNumber(-1)
                                                 .build()
                                 ))
                                 .build(),
