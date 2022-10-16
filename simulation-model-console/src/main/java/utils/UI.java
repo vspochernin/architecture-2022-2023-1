@@ -40,14 +40,14 @@ public class UI {
         inputCharacteristicsTable.addRule();
         for (InputCharacteristicTableRow row : simulation.getInputCharacteristicTableRows()) {
             inputCharacteristicsTable.addRow(
-                    row.getNumber(),
-                    row.getCountOfRequests(),
+                    row.getInputNumber(),
+                    row.getCountOfGeneratedRequests(),
                     row.getFailureProbability(),
-                    row.getStayTime(),
-                    row.getBufferTime(),
-                    row.getServiceTime(),
-                    row.getBufferVariance(),
-                    row.getServiceVariance());
+                    row.getAvgStayTime(),
+                    row.getAvgBufferTime(),
+                    row.getAvgServiceTime(),
+                    row.getAvgBufferTimeVariance(),
+                    row.getAvgServiceTimeVariance());
             inputCharacteristicsTable.addRule();
         }
 
@@ -59,7 +59,7 @@ public class UI {
         deviceCharacteristicsTable.addRule();
         for (DeviceCharacteristicTableRow row : simulation.getDeviceCharacteristicTableRows()) {
             deviceCharacteristicsTable.addRow(
-                    row.getNumber(),
+                    row.getDeviceNumber(),
                     row.getUtilizationRate());
             deviceCharacteristicsTable.addRule();
         }
@@ -85,7 +85,7 @@ public class UI {
         for (CalendarAndStateTableRow row : stepData.getCalendarAndStateTableRows()) {
             calendarAndStateTable.addRow(
                     row.getEvent(),
-                    (row.getTime() != -1) ? row.getTime() : "",
+                    (row.getTimeWhenHappen() != -1) ? row.getTimeWhenHappen() : "",
                     (row.getRequestCount() != -1) ? row.getRequestCount() : "",
                     (row.getFailureCount() != -1) ? row.getFailureCount() : "");
             calendarAndStateTable.addRule();
@@ -101,7 +101,7 @@ public class UI {
         bufferTable.addRule();
         for (BufferTableRow row : stepData.getBufferTableRows()) {
             bufferTable.addRow(
-                    row.getPosition(),
+                    row.getPositionNumber(),
                     (row.getRegistrationTime() != -1) ? row.getRegistrationTime() : "",
                     (row.getInputNumber() != -1) ? row.getInputNumber() : "",
                     (row.getRequestNumber() != -1) ? row.getRequestNumber() : "");
@@ -123,56 +123,56 @@ public class UI {
                                 .calendarAndStateTableRows(List.of(
                                         CalendarAndStateTableRow.builder()
                                                 .event("I1")
-                                                .time(4.3)
+                                                .timeWhenHappen(4.3)
                                                 .requestCount(0)
                                                 .failureCount(0)
                                                 .build(),
                                         CalendarAndStateTableRow.builder()
                                                 .event("I2")
-                                                .time(5.3)
+                                                .timeWhenHappen(5.3)
                                                 .requestCount(0)
                                                 .failureCount(0)
                                                 .build(),
                                         CalendarAndStateTableRow.builder()
                                                 .event("I3")
-                                                .time(6.3)
+                                                .timeWhenHappen(6.3)
                                                 .requestCount(0)
                                                 .failureCount(0)
                                                 .build(),
                                         CalendarAndStateTableRow.builder()
                                                 .event("D1")
-                                                .time(0.0)
+                                                .timeWhenHappen(0.0)
                                                 .requestCount(0)
                                                 .failureCount(-1)
                                                 .build(),
                                         CalendarAndStateTableRow.builder()
                                                 .event("D2")
-                                                .time(0.0)
+                                                .timeWhenHappen(0.0)
                                                 .requestCount(0)
                                                 .failureCount(-1)
                                                 .build(),
                                         CalendarAndStateTableRow.builder()
                                                 .event("D3")
-                                                .time(0.0)
+                                                .timeWhenHappen(0.0)
                                                 .requestCount(0)
                                                 .failureCount(-1)
                                                 .build(),
                                         CalendarAndStateTableRow.builder()
                                                 .event("End of simulate")
-                                                .time(999.0)
+                                                .timeWhenHappen(999.0)
                                                 .requestCount(-1)
                                                 .failureCount(-1)
                                                 .build()
                                 ))
                                 .bufferTableRows(List.of(
                                         BufferTableRow.builder()
-                                                .position(1)
+                                                .positionNumber(1)
                                                 .registrationTime(2.2)
                                                 .inputNumber(3)
                                                 .requestNumber(2)
                                                 .build(),
                                         BufferTableRow.builder()
-                                                .position(2)
+                                                .positionNumber(2)
                                                 .registrationTime(-1)
                                                 .inputNumber(-1)
                                                 .requestNumber(-1)
@@ -184,56 +184,56 @@ public class UI {
                                 .calendarAndStateTableRows(List.of(
                                         CalendarAndStateTableRow.builder()
                                                 .event("I1")
-                                                .time(44.3)
+                                                .timeWhenHappen(44.3)
                                                 .requestCount(0)
                                                 .failureCount(0)
                                                 .build(),
                                         CalendarAndStateTableRow.builder()
                                                 .event("I2")
-                                                .time(55.3)
+                                                .timeWhenHappen(55.3)
                                                 .requestCount(0)
                                                 .failureCount(0)
                                                 .build(),
                                         CalendarAndStateTableRow.builder()
                                                 .event("I3")
-                                                .time(666.3)
+                                                .timeWhenHappen(666.3)
                                                 .requestCount(0)
                                                 .failureCount(0)
                                                 .build(),
                                         CalendarAndStateTableRow.builder()
                                                 .event("D1")
-                                                .time(1.0)
+                                                .timeWhenHappen(1.0)
                                                 .requestCount(0)
                                                 .failureCount(0)
                                                 .build(),
                                         CalendarAndStateTableRow.builder()
                                                 .event("D2")
-                                                .time(2.0)
+                                                .timeWhenHappen(2.0)
                                                 .requestCount(0)
                                                 .failureCount(0)
                                                 .build(),
                                         CalendarAndStateTableRow.builder()
                                                 .event("D3")
-                                                .time(3.0)
+                                                .timeWhenHappen(3.0)
                                                 .requestCount(0)
                                                 .failureCount(0)
                                                 .build(),
                                         CalendarAndStateTableRow.builder()
                                                 .event("End of simulate")
-                                                .time(999.0)
+                                                .timeWhenHappen(999.0)
                                                 .requestCount(0)
                                                 .failureCount(0)
                                                 .build()
                                 ))
                                 .bufferTableRows(List.of(
                                         BufferTableRow.builder()
-                                                .position(1)
+                                                .positionNumber(1)
                                                 .registrationTime(2.2)
                                                 .inputNumber(3)
                                                 .requestNumber(2)
                                                 .build(),
                                         BufferTableRow.builder()
-                                                .position(2)
+                                                .positionNumber(2)
                                                 .registrationTime(3.2)
                                                 .inputNumber(4)
                                                 .requestNumber(5)
@@ -243,47 +243,47 @@ public class UI {
                 ))
                 .inputCharacteristicTableRows(List.of(
                         InputCharacteristicTableRow.builder()
-                                .number(1)
-                                .countOfRequests(11)
+                                .inputNumber(1)
+                                .countOfGeneratedRequests(11)
                                 .failureProbability(0.11)
-                                .stayTime(11.11)
-                                .bufferTime(111.111)
-                                .serviceTime(1111.1111)
-                                .bufferVariance(11111.11111)
-                                .serviceVariance(111111.111111)
+                                .avgStayTime(11.11)
+                                .avgBufferTime(111.111)
+                                .avgServiceTime(1111.1111)
+                                .avgBufferTimeVariance(11111.11111)
+                                .avgServiceTimeVariance(111111.111111)
                                 .build(),
                         InputCharacteristicTableRow.builder()
-                                .number(2)
-                                .countOfRequests(22)
+                                .inputNumber(2)
+                                .countOfGeneratedRequests(22)
                                 .failureProbability(0.22)
-                                .stayTime(22.22)
-                                .bufferTime(222.222)
-                                .serviceTime(2222.2222)
-                                .bufferVariance(22222.22222)
-                                .serviceVariance(222222.222222)
+                                .avgStayTime(22.22)
+                                .avgBufferTime(222.222)
+                                .avgServiceTime(2222.2222)
+                                .avgBufferTimeVariance(22222.22222)
+                                .avgServiceTimeVariance(222222.222222)
                                 .build(),
                         InputCharacteristicTableRow.builder()
-                                .number(3)
-                                .countOfRequests(33)
+                                .inputNumber(3)
+                                .countOfGeneratedRequests(33)
                                 .failureProbability(0.33)
-                                .stayTime(33.33)
-                                .bufferTime(333.333)
-                                .serviceTime(3333.3333)
-                                .bufferVariance(33333.33333)
-                                .serviceVariance(333333.333333)
+                                .avgStayTime(33.33)
+                                .avgBufferTime(333.333)
+                                .avgServiceTime(3333.3333)
+                                .avgBufferTimeVariance(33333.33333)
+                                .avgServiceTimeVariance(333333.333333)
                                 .build()
                 ))
                 .deviceCharacteristicTableRows(List.of(
                         DeviceCharacteristicTableRow.builder()
-                                .number(1)
+                                .deviceNumber(1)
                                 .utilizationRate(0.11)
                                 .build(),
                         DeviceCharacteristicTableRow.builder()
-                                .number(2)
+                                .deviceNumber(2)
                                 .utilizationRate(0.22)
                                 .build(),
                         DeviceCharacteristicTableRow.builder()
-                                .number(3)
+                                .deviceNumber(3)
                                 .utilizationRate(0.33)
                                 .build()
                 ))

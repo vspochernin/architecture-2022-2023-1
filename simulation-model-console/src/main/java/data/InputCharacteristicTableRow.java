@@ -8,12 +8,12 @@ import lombok.Data;
 @Builder
 public class InputCharacteristicTableRow {
 
-    int number; // Номер источника.
-    int countOfRequests; // Количество сгенерированных заявок.
+    int inputNumber; // Номер источника.
+    int countOfGeneratedRequests; // Количество сгенерированных заявок.
     double failureProbability; // Вероятность отказа.
-    double stayTime; // Среднее время пребывания заявки в системе.
-    double bufferTime; // Среднее время пребывания заявки в буфере.
-    double serviceTime; // Среднее время обслуживания заявки.
-    double bufferVariance; // Дисперсия среднего времени пребывания заявки в буфере.
-    double serviceVariance; // Дисперсия
+    double avgStayTime; // Среднее время пребывания заявки в системе.
+    double avgBufferTime; // Среднее время пребывания заявки в буфере.
+    double avgServiceTime; // Среднее время обслуживания заявки.
+    double avgBufferTimeVariance; // Дисперсия среднего времени пребывания заявки в буфере.
+    double avgServiceTimeVariance; // Дисперсия среднего времени обслуживания заявки.
 }

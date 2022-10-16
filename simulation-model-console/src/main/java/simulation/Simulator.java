@@ -30,7 +30,7 @@ public class Simulator {
         PriorityQueue<Event> events = new PriorityQueue<>();
 
         // Опрашиваем все источники, когда они готовы дать нам запрос.
-        for (int i = 0; i < inputKit.getSize(); i++) {
+        for (int i = 0; i < inputKit.getCount(); i++) {
             double generationTime = Utils.getUniformDistribution(config.getA(), config.getB());
             events.add(new Event(generationTime, EventType.REQUEST_GENERATION));
             inputKit.startGenerating(i, generationTime);

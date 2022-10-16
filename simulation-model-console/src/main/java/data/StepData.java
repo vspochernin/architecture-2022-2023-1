@@ -11,6 +11,6 @@ import lombok.Data;
 public class StepData {
 
     private String description; // Описание шага.
-    private List<CalendarAndStateTableRow> calendarAndStateTableRows; // Данные для таблицы "Календарь/текущее состояние".
+    private List<CalendarAndStateTableRow> calendarAndStateTableRows; // Данные для таблицы Календарь/Текущее состояние.
     private List<BufferTableRow> bufferTableRows; // Данные для таблицы "Буфер".
 }

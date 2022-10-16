@@ -12,15 +12,15 @@ public class Input {
 
     private final int inputNumber; // Порядковый номер источника.
 
-    private double nextRequestTime = 0;
+    private double nextRequestGeneratedTime = 0;
 
-    private int requestCount = 0; // Количество сгенерированных источником заявок.
-    private int failureCount = 0; // Количество отказов от источника.
+    private int countOfGeneratedRequests = 0; // Количество сгенерированных источником заявок.
+    private int countOfFailureRequests = 0; // Количество отказов от источника.
     private double failureProbability = 0; // Вероятность отказа источника (считается в конце).
-    private double stayTime = 0; // Среднее время пребывания заявки в системе.
-    private double bufferTime = 0; // Среднее время пребывания заявки в буффере.
-    private double serviceTime = 0; // Среднее время пребывания заявки на приборе.
-    private double bufferVariance = 0; // Дисперсия нахождения в буфере.
-    private double serviceVariance = 0; // Дисперсия нахождения на приборе.
+    private double avgStayTime = 0; // Среднее время пребывания заявки в системе.
+    private double avgBufferTime = 0; // Среднее время пребывания заявки в буффере.
+    private double avgServiceTime = 0; // Среднее время пребывания заявки на приборе.
+    private double avgBufferTimeVariance = 0; // Дисперсия нахождения в буфере.
+    private double avgServiceTimeVariance = 0; // Дисперсия нахождения на приборе.
 
 }

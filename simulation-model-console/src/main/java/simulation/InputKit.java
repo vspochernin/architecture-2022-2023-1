@@ -18,11 +18,11 @@ public class InputKit {
         }
     }
 
-    public int getSize() {
+    public int getCount() {
         return inputs.size();
     }
 
     public void startGenerating(int i, double generationTime) {
-        inputs.get(i).setNextRequestTime(generationTime);
+        inputs.get(i).setNextRequestGeneratedTime(generationTime);
     }
 }
