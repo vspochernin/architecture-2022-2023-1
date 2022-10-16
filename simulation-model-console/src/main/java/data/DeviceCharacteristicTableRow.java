@@ -8,6 +8,6 @@ import lombok.Data;
 @Builder
 public class DeviceCharacteristicTableRow {
 
-    long number; // Номер прибора.
+    int number; // Номер прибора.
     double utilizationRate; // Коэффициент использования.
 }

@@ -8,8 +8,8 @@ import lombok.Data;
 @Builder
 public class BufferTableRow {
 
-    long position; // Позиция в буфере.
+    int position; // Позиция в буфере.
     double registrationTime; // Абсолютное время постановки в буфер.
-    double inputNumber; // Номер источника, создавшего заявку.
-    double requestNumber; // Порядковый номер заявки источника.
+    int inputNumber; // Номер источника, создавшего заявку.
+    int requestNumber; // Порядковый номер заявки источника.
 }

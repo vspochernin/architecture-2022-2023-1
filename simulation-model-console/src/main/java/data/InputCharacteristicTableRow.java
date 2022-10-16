@@ -8,8 +8,8 @@ import lombok.Data;
 @Builder
 public class InputCharacteristicTableRow {
 
-    long number; // Номер источника.
-    long countOfRequests; // Количество сгенерированных заявок.
+    int number; // Номер источника.
+    int countOfRequests; // Количество сгенерированных заявок.
     double failureProbability; // Вероятность отказа.
     double stayTime; // Среднее время пребывания заявки в системе.
     double bufferTime; // Среднее время пребывания заявки в буфере.

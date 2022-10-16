@@ -10,15 +10,15 @@ import lombok.Getter;
 @Getter
 public class Config {
 
-    private final long inputCount; // Количество источников.
-    private final long bufferSize; // Размер буфера.
-    private final long deviceCount; // Количество приборов.
-    private final long requestCount; // Количество запросов.
+    private final int inputCount; // Количество источников.
+    private final int bufferSize; // Размер буфера.
+    private final int deviceCount; // Количество приборов.
+    private final int requestCount; // Количество запросов.
     private final double a; // Параметр a равномерного распределения.
     private final double b; // Параметр b равномерного распределения.
     private final double lambda; // Параметр lambda экспоненциального распределения.
 
-    private Config(long inputCount, long bufferSize, long deviceCount, long requestCount, double a, double b,
+    private Config(int inputCount, int bufferSize, int deviceCount, int requestCount, double a, double b,
                   double lambda) {
         this.inputCount = inputCount;
         this.bufferSize = bufferSize;
@@ -31,19 +31,19 @@ public class Config {
 
     public static Config generateConfigFromFile(String fileName) throws IOException {
         try(BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            long inputCount = Long.parseLong(br.readLine());
+            int inputCount = Integer.parseInt(br.readLine());
             if (inputCount <= 0) {
                 throw new IllegalArgumentException("Неположительное значение количества источников");
             }
-            long bufferSize = Long.parseLong(br.readLine());
+            int bufferSize = Integer.parseInt(br.readLine());
             if (bufferSize <= 0) {
                 throw new IllegalArgumentException("Неположительное значение размера буфера");
             }
-            long deviceCount = Long.parseLong(br.readLine());
+            int deviceCount = Integer.parseInt(br.readLine());
             if (deviceCount <= 0) {
                 throw new IllegalArgumentException("Неположительное значение количества приборов");
             }
-            long requestCount = Long.parseLong(br.readLine());
+            int requestCount = Integer.parseInt(br.readLine());
             if (requestCount <= 0) {
                 throw new IllegalArgumentException("Неположительное значение количества запросов");
             }

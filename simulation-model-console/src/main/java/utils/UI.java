@@ -79,13 +79,13 @@ public class UI {
         calendarAndStateTable.addRow(
                 "Event",
                 "Time",
-                "Request count",
-                "Failure count");
+                "Request count / Input Number",
+                "Failure count / Request Number");
         calendarAndStateTable.addRule();
         for (CalendarAndStateTableRow row : stepData.getCalendarAndStateTableRows()) {
             calendarAndStateTable.addRow(
                     row.getEvent(),
-                    row.getTime(),
+                    (row.getTime() != -1) ? row.getTime() : "",
                     (row.getRequestCount() != -1) ? row.getRequestCount() : "",
                     (row.getFailureCount() != -1) ? row.getFailureCount() : "");
             calendarAndStateTable.addRule();

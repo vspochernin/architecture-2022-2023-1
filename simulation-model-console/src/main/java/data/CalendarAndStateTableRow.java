@@ -11,6 +11,6 @@ public class CalendarAndStateTableRow {
 
     String event; // Описание события.
     double time; // Абсолютное время, когда случится событие.
-    long requestCount; // Число заявок.
-    long failureCount; // Число отказов.
+    int requestCount; // Число заявок.
+    int failureCount; // Число отказов.
 }
