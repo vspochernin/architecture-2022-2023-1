@@ -1,8 +1,9 @@
 import java.util.Scanner;
 
 import data.SimulationResult;
+import simulation.Config;
+import simulation.Simulator;
 
-import static utils.UI.getTestSimulationResult;
 import static utils.UI.showAutoResults;
 import static utils.UI.showHelp;
 import static utils.UI.showIncorrectCommandMessage;
@@ -23,9 +24,13 @@ public class Main {
             if (command.equals("help")) {
                 showHelp();
             } else if (command.equals("simulate")) {
-                // TODO: Валидация данных из конфиг файла.
-                // TODO: Симуляция системы.
-                simulationResult = getTestSimulationResult();
+                try {
+                    simulationResult = Simulator.simulate(Config.generateConfigFromFile("src/main/resources" +
+                                "/input.txt"));
+                } catch (Exception e) {
+                    System.out.println("Проблема при симуляции: " + e.getMessage());
+                }
+                //simulationResult = getTestSimulationResult();
                 System.out.println("Система успешно просимулирована.");
             } else if (command.equals("auto")) {
                 if (simulationResult == null) {
