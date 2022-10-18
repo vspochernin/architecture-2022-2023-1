@@ -29,7 +29,7 @@ public class Simulator {
         public static void handleRequest(Request createdRequest) {
             if (deviceKit.isThereFreeDevice()) {
                 double nextReleaseTime = getNextReleaseTime();
-                int deviceNumber = deviceKit.putRequestToDevice(createdRequest, nextReleaseTime);
+                int deviceNumber = deviceKit.putRequestToDevice(createdRequest, currentTime, nextReleaseTime);
                 events.add(new Event(nextReleaseTime, EventType.DEVICE_RELEASE, deviceNumber));
                 description.append("\n- Созданная заявка поступила на свободный прибор " + deviceNumber + ".");
             } else if (buffer.isThereFreeBufferPlace()) {
@@ -55,9 +55,9 @@ public class Simulator {
             if (buffer.isEmpty()) {
                 description.append("\n- Буфер был пуст, поэтому прибор остался свободным.");
             } else {
-                Request newestRequest = buffer.extractNewestRequest();
+                Request newestRequest = buffer.extractNewestRequest(currentTime);
                 double nextReleaseTime = getNextReleaseTime();
-                deviceKit.putRequestToDevice(newestRequest, nextReleaseTime);
+                deviceKit.putRequestToDevice(newestRequest, currentTime, nextReleaseTime);
                 events.add(new Event(nextReleaseTime, EventType.DEVICE_RELEASE, deviceNumber));
                 description.append("\n- Буфер был не пуст и на прибор отправилась самая младшая заявка в буфере " +
                         newestRequest.toString() + ".");
@@ -123,7 +123,7 @@ public class Simulator {
             // Сгенерировалась заявка.
             if (currentEvent.getType() == EventType.REQUEST_GENERATION) {
                 // Получили новую заявку.
-                Request generatedRequest = inputKit.generateRequest(currentEvent.getUnitNumber());
+                Request generatedRequest = inputKit.generateRequest(currentEvent.getUnitNumber(), currentTime);
                 description.append("\n- Источник ").append(generatedRequest.getInputNumber()).append(" сгенерировал " +
                         "заявку ").append(generatedRequest).append(".");
 

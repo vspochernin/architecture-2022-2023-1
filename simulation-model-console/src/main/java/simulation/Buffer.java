@@ -83,7 +83,7 @@ public class Buffer {
     }
 
     // Достать из буфера самый младший запрос.
-    public Request extractNewestRequest() {
+    public Request extractNewestRequest(double currentTime) {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
@@ -99,6 +99,6 @@ public class Buffer {
         }
 
         busyBufferPlaces--;
-        return bufferPlaces.get(newestBufferPlace).extractRequest();
+        return bufferPlaces.get(newestBufferPlace).extractRequest(currentTime);
     }
 }

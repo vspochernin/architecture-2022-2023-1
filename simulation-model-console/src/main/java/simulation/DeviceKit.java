@@ -30,7 +30,7 @@ public class DeviceKit {
     }
 
     // Ставим заявку на прибор и возвращаем номер, куда поставили.
-    public int putRequestToDevice(Request request, double timeWhenDone) {
+    public int putRequestToDevice(Request request, double currentTime, double timeWhenDone) {
         if (!isThereFreeDevice()) {
             throw new NoSuchElementException("Критическая ошибка");
         }
@@ -38,7 +38,7 @@ public class DeviceKit {
         // Идем до конца в поисках пустого прибора.
         while (currentPointer < deviceCount) {
             if (devices.get(currentPointer).isFree()) {
-                devices.get(currentPointer).putRequest(request, timeWhenDone);
+                devices.get(currentPointer).putRequest(request, currentTime, timeWhenDone);
                 busyDeviceCount++;
                 return currentPointer++;
             }
@@ -49,7 +49,7 @@ public class DeviceKit {
         currentPointer = 0;
         while (currentPointer < deviceCount) {
             if (devices.get(currentPointer).isFree()) {
-                devices.get(currentPointer).putRequest(request, timeWhenDone);
+                devices.get(currentPointer).putRequest(request, currentTime, timeWhenDone);
                 busyDeviceCount++;
                 return currentPointer++;
             }

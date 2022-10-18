@@ -32,8 +32,8 @@ public class InputKit {
     }
 
     // Сгенерировать заявку.
-    public Request generateRequest(int inputNumber) {
+    public Request generateRequest(int inputNumber, double currentTime) {
         activeInputCount--;
-        return inputs.get(inputNumber).generateRequest();
+        return inputs.get(inputNumber).generateRequest(currentTime);
     }
 }

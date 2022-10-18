@@ -13,17 +13,28 @@ public class BufferPlace {
     private double registrationTime = -1; // Время постановки в буфер.
 
     public void putRequest(Request request, double currentTime) {
+        request.setBufferPlace(this);
+        request.setBufferPutTime(currentTime);
+
         stashedRequest = request;
         registrationTime = currentTime;
     }
 
-    // TODO: Наверное, как-то отдельно надо считать время заявки в буфере.
     public void forcePutRequest(Request request, double currentTime) {
+        stashedRequest.setBufferReleaseTime(currentTime);
+        stashedRequest.calculate();
+
+        request.setBufferPlace(this);
+        request.setBufferPutTime(currentTime);
+
         stashedRequest = request;
         registrationTime = currentTime;
     }
 
-    public Request extractRequest() {
+    public Request extractRequest(double currentTime) {
+        stashedRequest.setBufferReleaseTime(currentTime);
+        stashedRequest.calculate();
+
         Request result = stashedRequest;
 
         stashedRequest = null;

@@ -14,12 +14,18 @@ public class Device {
 
     private double busyTime = 0; // Время занятости прибора.
 
-    public void putRequest(Request request, double timeWhenDone) {
+    public void putRequest(Request request, double currentTime, double timeWhenDone) {
+        request.setDevice(this);
+        request.setDevicePutTime(currentTime);
+        request.setDeviceReleaseTime(timeWhenDone);
+
         currentProcessedRequest = request;
         timeWhenProcessDone =  timeWhenDone;
     }
 
     public void releaseDevice() {
+        currentProcessedRequest.calculate();
+
         currentProcessedRequest = null;
         timeWhenProcessDone = -1;
     }

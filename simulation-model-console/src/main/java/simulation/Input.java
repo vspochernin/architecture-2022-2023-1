@@ -26,8 +26,8 @@ public class Input {
 
 
     // Сгенерировать запрос.
-    public Request generateRequest() {
-        Request generatedRequest = new Request(inputNumber, countOfGeneratedRequests, this);
+    public Request generateRequest(double currentTime) {
+        Request generatedRequest = new Request(inputNumber, countOfGeneratedRequests, this, currentTime);
         countOfGeneratedRequests++;
         nextRequestGeneratedTime = -1;
         return generatedRequest;
