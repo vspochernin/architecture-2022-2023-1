@@ -32,6 +32,8 @@ public class Main {
                 }
                 System.out.println("Система успешно просимулирована.");
                 System.out.println("Количество шагов: " + simulationResult.getSteps().size());
+                System.out.println("Время окончания моделирования: " + simulationResult.getModelingTime());
+                System.out.println("Общее время реализации: " + simulationResult.getTotalSimulationTime());
             } else if (command.equals("auto")) {
                 if (simulationResult == null) {
                     System.out.println("Результаты еще не готовы.");

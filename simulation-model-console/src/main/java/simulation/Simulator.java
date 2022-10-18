@@ -139,6 +139,7 @@ public class Simulator {
                     description.append("\n- Сейчас была сгенерирована последняя заявка, следовательно произошло " +
                             "окончание процесса моделирования (окончание процесса генерации заявок).");
                     isModelingStop = true;
+                    simulationResult.setModelingTime(currentTime);
                 }
 
                 // Обработали сгенерированную заявку.
@@ -153,6 +154,7 @@ public class Simulator {
             description.setLength(0);
         }
 
+        simulationResult.setTotalSimulationTime(currentTime);
         return simulationResult;
     }
 }

@@ -23,6 +23,9 @@ public class SimulationResult {
     private List<DeviceCharacteristicTableRow> deviceCharacteristicTableRows; // Данные для таблицы характеристик
     // приборов ВС.
 
+    private double modelingTime; // Окончание моделирования (время генерации последней заявки).
+    private double totalSimulationTime; // Общее время реализации (выход из системы последней заявки).
+
     // Добавить шаг в результаты.
     public void addStep(InputKit inputKit, DeviceKit deviceKit, Buffer buffer, String description) {
         StepData stepData = StepData.builder()
