@@ -25,8 +25,8 @@ public class Main {
                 showHelp();
             } else if (command.equals("simulate")) {
                 try {
-                    simulationResult = Simulator.simulate(Config.generateConfigFromFile("src/main/resources" +
-                            "/input.txt"));
+                    simulationResult = Simulator.simulate(Config.generateConfigFromProperties("src/main/resources" +
+                            "/input.properties"));
                 } catch (Exception e) {
                     System.out.println("Проблема при симуляции: " + e.getMessage());
                 }

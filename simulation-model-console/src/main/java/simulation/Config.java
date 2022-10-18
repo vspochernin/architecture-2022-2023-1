@@ -1,8 +1,8 @@
 package simulation;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 import lombok.Getter;
 
@@ -29,41 +29,42 @@ public class Config {
         this.lambda = lambda;
     }
 
-    public static Config generateConfigFromFile(String fileName) throws IOException {
-        try(BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            int inputCount = Integer.parseInt(br.readLine());
-            if (inputCount <= 0) {
-                throw new IllegalArgumentException("Неположительное значение количества источников");
-            }
-            int bufferSize = Integer.parseInt(br.readLine());
-            if (bufferSize <= 0) {
-                throw new IllegalArgumentException("Неположительное значение размера буфера");
-            }
-            int deviceCount = Integer.parseInt(br.readLine());
-            if (deviceCount <= 0) {
-                throw new IllegalArgumentException("Неположительное значение количества приборов");
-            }
-            int requestCount = Integer.parseInt(br.readLine());
-            if (requestCount <= 0) {
-                throw new IllegalArgumentException("Неположительное значение количества запросов");
-            }
-            double a = Double.parseDouble(br.readLine());
-            if (a < 0) {
-                throw new IllegalArgumentException("Отрицательное значение параметра a");
-            }
-            double b = Double.parseDouble(br.readLine());
-            if (b < 0) {
-                throw new IllegalArgumentException("Отрицательное значение параметра b");
-            }
-            if (a >= b) {
-                throw new IllegalArgumentException("Параметр b не больше, чем параметр a");
-            }
-            double lambda = Double.parseDouble(br.readLine());
-            if (lambda == 0.0) {
-                throw new IllegalArgumentException("Нулевой параметр lambda");
-            }
+    public static Config generateConfigFromProperties(String propertiesPath) throws IOException {
+        Properties configProperties = new Properties();
+        configProperties.load(new FileInputStream(propertiesPath));
 
-            return new Config(inputCount, bufferSize, deviceCount, requestCount, a, b, lambda);
+        int inputCount = Integer.parseInt(configProperties.getProperty("input-count"));
+        if (inputCount <= 0) {
+            throw new IllegalArgumentException("Неположительное значение количества источников");
         }
+        int bufferSize = Integer.parseInt(configProperties.getProperty("buffer-size"));
+        if (bufferSize <= 0) {
+            throw new IllegalArgumentException("Неположительное значение размера буфера");
+        }
+        int deviceCount = Integer.parseInt(configProperties.getProperty("device-count"));
+        if (deviceCount <= 0) {
+            throw new IllegalArgumentException("Неположительное значение количества приборов");
+        }
+        int requestCount = Integer.parseInt(configProperties.getProperty("request-count"));
+        if (requestCount <= 0) {
+            throw new IllegalArgumentException("Неположительное значение количества запросов");
+        }
+        double a = Double.parseDouble(configProperties.getProperty("a-param"));
+        if (a < 0) {
+            throw new IllegalArgumentException("Отрицательное значение параметра a");
+        }
+        double b = Double.parseDouble(configProperties.getProperty("b-param"));
+        if (b < 0) {
+            throw new IllegalArgumentException("Отрицательное значение параметра b");
+        }
+        if (a >= b) {
+            throw new IllegalArgumentException("Параметр b не больше, чем параметр a");
+        }
+        double lambda = Double.parseDouble(configProperties.getProperty("lambda-param"));
+        if (lambda == 0.0) {
+            throw new IllegalArgumentException("Нулевой параметр lambda");
+        }
+
+        return new Config(inputCount, bufferSize, deviceCount, requestCount, a, b, lambda);
     }
 }
