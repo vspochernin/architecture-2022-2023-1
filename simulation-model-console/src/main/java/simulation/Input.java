@@ -12,10 +12,11 @@ public class Input {
 
     private final int inputNumber; // Порядковый номер источника.
 
-    private double nextRequestGeneratedTime = 0;
-
-    private int countOfGeneratedRequests = 0; // Количество сгенерированных источником заявок.
+    private double nextRequestGeneratedTime = -1; // Время, когда сгенерируется очередной запрос.
     private int countOfFailureRequests = 0; // Количество отказов от источника.
+
+    // Табличные характеристики источника.
+    private int countOfGeneratedRequests = 0; // Количество сгенерированных источником заявок.
     private double failureProbability = 0; // Вероятность отказа источника (считается в конце).
     private double avgStayTime = 0; // Среднее время пребывания заявки в системе.
     private double avgBufferTime = 0; // Среднее время пребывания заявки в буффере.
@@ -23,4 +24,16 @@ public class Input {
     private double avgBufferTimeVariance = 0; // Дисперсия нахождения в буфере.
     private double avgServiceTimeVariance = 0; // Дисперсия нахождения на приборе.
 
+
+    // Сгенерировать запрос.
+    public Request generateRequest() {
+        Request generatedRequest = new Request(inputNumber, countOfGeneratedRequests, this);
+        countOfGeneratedRequests++;
+        nextRequestGeneratedTime = -1;
+        return generatedRequest;
+    }
+
+    public void startGenerating(double generationTime) {
+        nextRequestGeneratedTime = generationTime;
+    }
 }

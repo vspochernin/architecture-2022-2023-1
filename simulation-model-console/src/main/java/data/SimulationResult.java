@@ -54,8 +54,8 @@ public class SimulationResult {
             stepData.getBufferTableRows().add(BufferTableRow.builder()
                     .positionNumber(bufferPlace.getPositionNumber())
                     .registrationTime(bufferPlace.getRegistrationTime())
-                    .inputNumber(bufferPlace.getInputNumber())
-                    .requestNumber(bufferPlace.getRequestNumber())
+                    .inputNumber(bufferPlace.getStashedRequest() != null ? bufferPlace.getStashedRequest().getInputNumber() : -1)
+                    .requestNumber(bufferPlace.getStashedRequest() != null ? bufferPlace.getStashedRequest().getRequestNumber() : -1)
                     .build());
         }
 

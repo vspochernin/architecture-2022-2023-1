@@ -26,12 +26,12 @@ public class Main {
             } else if (command.equals("simulate")) {
                 try {
                     simulationResult = Simulator.simulate(Config.generateConfigFromFile("src/main/resources" +
-                                "/input.txt"));
+                            "/input.txt"));
                 } catch (Exception e) {
                     System.out.println("Проблема при симуляции: " + e.getMessage());
                 }
-                //simulationResult = getTestSimulationResult();
                 System.out.println("Система успешно просимулирована.");
+                System.out.println("Количество шагов: " + simulationResult.getSteps().size());
             } else if (command.equals("auto")) {
                 if (simulationResult == null) {
                     System.out.println("Результаты еще не готовы.");

@@ -6,10 +6,12 @@ import java.util.List;
 import lombok.Getter;
 
 // Набор всех источников.
+@Getter
 public class InputKit {
 
-    @Getter
     private final List<Input> inputs;
+
+    private int activeInputCount = 0; // Источники, которые в данный момент генерируют заявки.
 
     public InputKit(int count) {
         inputs = new ArrayList<>();
@@ -18,11 +20,20 @@ public class InputKit {
         }
     }
 
+    // Получить количество источников.
     public int getCount() {
         return inputs.size();
     }
 
+    // Начать генерировать заявку i-м источником.
     public void startGenerating(int i, double generationTime) {
-        inputs.get(i).setNextRequestGeneratedTime(generationTime);
+        inputs.get(i).startGenerating(generationTime);
+        activeInputCount++;
+    }
+
+    // Сгенерировать заявку.
+    public Request generateRequest(int inputNumber) {
+        activeInputCount--;
+        return inputs.get(inputNumber).generateRequest();
     }
 }
