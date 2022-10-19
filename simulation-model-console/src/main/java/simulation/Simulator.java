@@ -155,6 +155,7 @@ public class Simulator {
         }
 
         simulationResult.setTotalSimulationTime(currentTime);
+        simulationResult.calculateStatistics(inputKit, deviceKit);
         return simulationResult;
     }
 }

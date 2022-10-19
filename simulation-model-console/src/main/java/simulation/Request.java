@@ -27,7 +27,22 @@ public class Request {
 
     // Подсчитать результаты пребывания заявки в системе.
     public void calculate() {
-        // TODO: подсчитать.
+        // TODO: Проверить весь код, что правильно прибавляешь. device.getBusyTime() += - не правильно.
+
+        // Заявка была и в буфере, и на приборе.
+        if (device != null && bufferPlace != null) {
+            device.considerRequest(devicePutTime, deviceReleaseTime);
+            bufferPlace.considerRequest(bufferPutTime, bufferReleaseTime);
+            input.considerRequestBoth(creationTime, bufferPutTime, bufferReleaseTime, devicePutTime, deviceReleaseTime);
+        } else if (device != null) { // Заявка была только на приборе, но не на буфере.
+            device.considerRequest(devicePutTime, deviceReleaseTime);
+            input.considerRequestDevice(creationTime, devicePutTime, deviceReleaseTime);
+        } else if (bufferPlace != null) { // Заявка была только в буфере, но не на приборе.
+            bufferPlace.considerRequest(bufferPutTime, bufferReleaseTime);
+            input.considerRequestBuffer(creationTime, bufferPutTime, bufferReleaseTime);
+        } else {
+            throw new IllegalStateException("Критическая ошибка");
+        }
     }
 
     @Override

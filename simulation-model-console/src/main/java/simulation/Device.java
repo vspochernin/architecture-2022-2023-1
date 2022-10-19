@@ -2,9 +2,11 @@ package simulation;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @RequiredArgsConstructor
 @Getter
+@Setter
 public class Device {
 
     private final int deviceNumber; // Порядковый номер прибора.
@@ -13,6 +15,7 @@ public class Device {
     private Request currentProcessedRequest = null; // Текущая обрабатываемая заявка.
 
     private double busyTime = 0; // Время занятости прибора.
+    private double handledRequestCount = 0; // Количество обслуженных прибором заявок.
 
     public void putRequest(Request request, double currentTime, double timeWhenDone) {
         request.setDevice(this);
@@ -33,5 +36,11 @@ public class Device {
     // Свободен ли прибор.
     public boolean isFree() {
         return currentProcessedRequest == null;
+    }
+
+    // Учесть запрос, когда тот уходит с прибора.
+    public void considerRequest(double devicePutTime, double deviceReleaseTime) {
+        busyTime += deviceReleaseTime - devicePutTime;
+        handledRequestCount++;
     }
 }

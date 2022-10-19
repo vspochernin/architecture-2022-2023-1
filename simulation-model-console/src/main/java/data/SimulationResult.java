@@ -64,4 +64,28 @@ public class SimulationResult {
 
         steps.add(stepData);
     }
+
+    public void calculateStatistics(InputKit inputKit, DeviceKit deviceKit) {
+        for (Device device : deviceKit.getDevices()) {
+            DeviceCharacteristicTableRow deviceCharacteristicTableRow = DeviceCharacteristicTableRow.builder()
+                    .deviceNumber(device.getDeviceNumber())
+                    .utilizationRate(device.getBusyTime() / totalSimulationTime)
+                    .build();
+            deviceCharacteristicTableRows.add(deviceCharacteristicTableRow);
+        }
+
+        for (Input input : inputKit.getInputs()) {
+            InputCharacteristicTableRow inputCharacteristicTableRow = InputCharacteristicTableRow.builder()
+                    .inputNumber(input.getInputNumber())
+                    .countOfGeneratedRequests(input.getCountOfGeneratedRequests())
+                    .failureProbability((double) input.getCountOfFailureRequests() / input.getCountOfGeneratedRequests())
+                    .avgStayTime(input.getStayTime() / input.getCountOfGeneratedRequests())
+                    .avgBufferTime(input.getBufferTime() / input.getCountOfGeneratedRequests())
+                    .avgServiceTime(input.getServiceTime() / input.getCountOfGeneratedRequests())
+                    .avgBufferTimeVariance(input.getBufferVariance())
+                    .avgServiceTimeVariance(input.getServiceVariance())
+                    .build();
+            inputCharacteristicTableRows.add(inputCharacteristicTableRow);
+        }
+    }
 }
