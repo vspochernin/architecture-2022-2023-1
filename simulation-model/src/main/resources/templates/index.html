@@ -1,0 +1,40 @@
+<html xmlns="http://www.thymeleaf.org">
+<head>
+    <title>
+        Simulator
+    </title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h2>Сконфигурирейте и запустите симуляцию</h2>
+    <hr/>
+    <form th:action="@{/simulate}" th:object="${config}" method="POST">
+        Количество источников
+        <input type="text" th:field="*{inputCount}" placeholder="Количество источников" class="form-control col-4 mb-4" />
+
+        Размер буфера
+        <input type="text" th:field="*{bufferSize}" placeholder="Размер буфера" class="form-control col-4 mb-4" />
+
+        Количество приборов
+        <input type="text" th:field="*{deviceCount}" placeholder="Количество приборов" class="form-control col-4 mb-4" />
+
+        Количество запросов
+        <input type="text" th:field="*{requestCount}" placeholder="Количество запросов" class="form-control col-4 mb-4" />
+
+        Параметр a
+        <input type="text" th:field="*{a}" placeholder="Параметр a" class="form-control col-4 mb-4" />
+
+        Параметр b
+        <input type="text" th:field="*{b}" placeholder="Параметр b" class="form-control col-4 mb-4" />
+
+        Параметр lambda
+        <input type="text" th:field="*{lambda}" placeholder="Параметр lambda" class="form-control col-4 mb-4" />
+        <button class="btn btn-primary" type="submit">Запустить симуляцию</button>
+    </form>
+</div>
+</body>
+</html>

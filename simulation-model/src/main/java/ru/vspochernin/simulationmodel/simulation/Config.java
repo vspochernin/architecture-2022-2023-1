@@ -5,18 +5,24 @@ import java.io.IOException;
 import java.util.Properties;
 
 import lombok.Getter;
+import lombok.Setter;
 
 // Конфигурация моделирования.
 @Getter
+@Setter
 public class Config {
 
-    private final int inputCount; // Количество источников.
-    private final int bufferSize; // Размер буфера.
-    private final int deviceCount; // Количество приборов.
-    private final int requestCount; // Количество запросов.
-    private final double a; // Параметр a равномерного распределения.
-    private final double b; // Параметр b равномерного распределения.
-    private final double lambda; // Параметр lambda экспоненциального распределения.
+    public int inputCount; // Количество источников.
+    public int bufferSize; // Размер буфера.
+    public int deviceCount; // Количество приборов.
+    public int requestCount; // Количество запросов.
+    public double a; // Параметр a равномерного распределения.
+    public double b; // Параметр b равномерного распределения.
+    public double lambda; // Параметр lambda экспоненциального распределения.
+
+    private Config() {
+
+    }
 
     private Config(int inputCount, int bufferSize, int deviceCount, int requestCount, double a, double b,
                   double lambda) {
@@ -66,5 +72,9 @@ public class Config {
         }
 
         return new Config(inputCount, bufferSize, deviceCount, requestCount, a, b, lambda);
+    }
+
+    public static Config getEmptyConfig() {
+        return new Config();
     }
 }
