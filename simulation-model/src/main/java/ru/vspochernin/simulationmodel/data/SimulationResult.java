@@ -23,8 +23,9 @@ public class SimulationResult {
     private List<DeviceCharacteristicTableRow> deviceCharacteristicTableRows; // Данные для таблицы характеристик
     // приборов ВС.
 
-    private double modelingTime; // Окончание моделирования (время генерации последней заявки).
-    private double totalSimulationTime; // Общее время реализации (выход из системы последней заявки).
+    private double modelingTime = 0.0; // Окончание моделирования (время генерации последней заявки).
+    private double totalSimulationTime = 0.0; // Общее время реализации (выход из системы последней заявки).
+    private int stepsCount = 0;
 
     // Добавить шаг в результаты.
     public void addStep(InputKit inputKit, DeviceKit deviceKit, Buffer buffer, String description) {

@@ -19,6 +19,10 @@
         <a th:href="@{/step/0}" class="btn btn-primary">Результаты пошагового режима</a>
     </div>
     <hr/>
+    <div th:text="'Всего шагов' + ' ' + ${stepscount}"></div>
+    <div th:text="'Время окончания моделирования' + ' ' + ${modeltime}"></div>
+    <div th:text="'Общее время реализации' + ' ' + ${totaltime}"></div>
+    <hr/>
     <h2>Сконфигурирейте и запустите симуляцию</h2>
     <hr/>
     <form th:action="@{/simulate}" th:object="${config}" method="POST">

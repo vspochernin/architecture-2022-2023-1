@@ -157,6 +157,7 @@ public class Simulator {
 
         simulationResult.setTotalSimulationTime(currentTime);
         simulationResult.calculateStatistics(inputKit, deviceKit);
+        simulationResult.setStepsCount(simulationResult.getSteps().size());
         return simulationResult;
     }
 

@@ -19,6 +19,9 @@ public class SimulationController {
         ModelAndView mav = new ModelAndView("index");
 
         mav.addObject("config", Simulator.config);
+        mav.addObject("stepscount", Simulator.simulationResult != null ? Simulator.simulationResult.getStepsCount() : 0);
+        mav.addObject("modeltime", Simulator.simulationResult != null ? Simulator.simulationResult.getModelingTime() : 0);
+        mav.addObject("totaltime", Simulator.simulationResult != null ? Simulator.simulationResult.getTotalSimulationTime() : 0);
 
         return mav;
     }
