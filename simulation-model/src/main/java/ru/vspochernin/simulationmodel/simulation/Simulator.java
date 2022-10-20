@@ -22,7 +22,7 @@ public class Simulator {
     private static double b; // Параметр b.
     private static Queue<Event> events; // Список событий (по нему симулируем систему).
     private static boolean isModelingStop; // Сгенерировалась ли последняя заявка?
-    private static SimulationResult simulationResult; // Результат симуляции.
+    public static SimulationResult simulationResult; // Результат симуляции.
 
     class PlaceDispatcher {
 

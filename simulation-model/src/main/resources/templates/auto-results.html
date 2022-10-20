@@ -1,0 +1,61 @@
+<html xmlns="http://www.thymeleaf.org">
+<head>
+    <title>
+        Simulator
+    </title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1>Результаты автоматического режима</h1>
+    <hr/>
+    <h2>Характеристики источников ВС</h2>
+    <hr/>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Номер источника</th>
+            <th>Количество заявок</th>
+            <th>Вероятность отказа</th>
+            <th>Тпреб</th>
+            <th>Тбп</th>
+            <th>Тобсл</th>
+            <th>Дбп</th>
+            <th>Добсл</th>
+        </tr>
+        <tbody>
+        <tr th:each="input: ${inputs}">
+            <td th:text="${input.inputNumber}"></td>
+            <td th:text="${input.countOfGeneratedRequests}"></td>
+            <td th:text="${input.failureProbability}"></td>
+            <td th:text="${input.avgStayTime}"></td>
+            <td th:text="${input.avgBufferTime}"></td>
+            <td th:text="${input.avgServiceTime}"></td>
+            <td th:text="${input.avgBufferTimeVariance}"></td>
+            <td th:text="${input.avgServiceTimeVariance}"></td>
+        </tr>
+        </tbody>
+        </thead>
+    </table>
+    <h2>Характеристики приборов ВС</h2>
+    <hr/>
+    <table class="table table-border table-striped">
+        <thead>
+        <tr>
+            <th>Номер прибора</th>
+            <th>Коэффициент использования</th>
+        </tr>
+        <tbody>
+        <tr th:each="device: ${devices}">
+            <td th:text="${device.deviceNumber}"></td>
+            <td th:text="${device.utilizationRate}"></td>
+        </tr>
+        </tbody>
+        </thead>
+    </table>
+</div>
+</body>
+</html>

@@ -65,9 +65,9 @@ public class UI {
         }
 
         System.out.println("Характеристики источников ВС:");
-        System.out.println(inputCharacteristicsTable.render(300));
+        System.out.println(inputCharacteristicsTable.render(200));
         System.out.println("Характеристики приборов ВС:");
-        System.out.println(deviceCharacteristicsTable.render(300));
+        System.out.println(deviceCharacteristicsTable.render(200));
     }
 
     public static void showStepResults(SimulationResult simulation, int step) {
@@ -110,9 +110,9 @@ public class UI {
 
         System.out.println("Описание текущего шага: " + desctiption);
         System.out.println("Календарь событий/текущее состояние:");
-        System.out.println(calendarAndStateTable.render(300));
+        System.out.println(calendarAndStateTable.render(100));
         System.out.println("Буфер:");
-        System.out.println(bufferTable.render(300));
+        System.out.println(bufferTable.render(100));
     }
 
     public static SimulationResult getTestSimulationResult() {

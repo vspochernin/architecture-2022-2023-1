@@ -1,0 +1,60 @@
+<html xmlns="http://www.thymeleaf.org">
+<head>
+    <title>
+        Simulator
+    </title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1>Результаты пошагового режима</h1>
+    <hr/>
+    <h2>Описание шага</h2>
+    <hr/>
+    <span style="white-space: pre-line" th:text="${description}"></span>
+    <h2>Календарь событий/текущее состояние</h2>
+    <hr/>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Событие</th>
+            <th>Время</th>
+            <th>Число заявок (Номер источника)</th>
+            <th>Число отказов (Номер заявки)</th>
+        </tr>
+        <tbody>
+        <tr th:each="event: ${calendar}">
+            <td th:text="${event.event}"></td>
+            <td th:text="${event.timeWhenHappen}"></td>
+            <td th:text="${event.requestCount}"></td>
+            <td th:text="${event.failureCount}"></td>
+        </tr>
+        </tbody>
+        </thead>
+    </table>
+    <h2>Буфер</h2>
+    <hr/>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Позиция</th>
+            <th>Время постановки</th>
+            <th>Источник</th>
+            <th>Заявка</th>
+        </tr>
+        <tbody>
+        <tr th:each="bufferPlace: ${buffer}">
+            <td th:text="${bufferPlace.positionNumber}"></td>
+            <td th:text="${bufferPlace.registrationTime}"></td>
+            <td th:text="${bufferPlace.inputNumber}"></td>
+            <td th:text="${bufferPlace.requestNumber}"></td>
+        </tr>
+        </tbody>
+        </thead>
+    </table>
+</div>
+</body>
+</html>
