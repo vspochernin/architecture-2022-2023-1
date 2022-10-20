@@ -12,7 +12,7 @@
 <div class="container">
     <h1>Результаты пошагового режима</h1>
     <hr/>
-    <h2>Описание шага</h2>
+    <h2 th:text="Шаг + ' ' + ${stepnumber}"></h2>
     <hr/>
     <span style="white-space: pre-line" th:text="${description}"></span>
     <h2>Календарь событий/текущее состояние</h2>
@@ -55,6 +55,11 @@
         </tbody>
         </thead>
     </table>
+    <h2>Навигация</h2>
+    <hr/>
+    <a th:href="@{/}" class="btn btn-info">Главная</a>
+    <a th:href="@{/auto}" class="btn btn-info">Результаты автоматического режима</a>
+    <a th:href="@{/step/0}" class="btn btn-info">Результаты пошагового режима</a>
 </div>
 </body>
 </html>

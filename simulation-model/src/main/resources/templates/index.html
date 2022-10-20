@@ -35,6 +35,10 @@
         <input type="text" th:field="*{lambda}" placeholder="Параметр lambda" class="form-control col-4 mb-4" />
         <button class="btn btn-primary" type="submit">Запустить симуляцию</button>
     </form>
+    <h2>Навигация</h2>
+    <hr/>
+    <a th:href="@{/auto}" class="btn btn-info">Результаты автоматического режима</a>
+    <a th:href="@{/step/0}" class="btn btn-info">Результаты пошагового режима</a>
 </div>
 </body>
 </html>

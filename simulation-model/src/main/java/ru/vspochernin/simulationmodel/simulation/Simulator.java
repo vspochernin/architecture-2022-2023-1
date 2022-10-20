@@ -23,6 +23,7 @@ public class Simulator {
     private static Queue<Event> events; // Список событий (по нему симулируем систему).
     private static boolean isModelingStop; // Сгенерировалась ли последняя заявка?
     public static SimulationResult simulationResult; // Результат симуляции.
+    public static Config config = Config.generateConfigFromProperties();
 
     class PlaceDispatcher {
 
@@ -65,7 +66,7 @@ public class Simulator {
         }
     }
 
-    public static void init(Config config) {
+    public static void init() {
         currentTime = 0;
         currentRequests = 0;
         requiredRequests = config.getRequestCount();
@@ -95,8 +96,8 @@ public class Simulator {
         return currentTime + Utils.getExponentialDistribution(lambda);
     }
 
-    public static SimulationResult simulate(Config config) {
-        init(config); // Инициализация симуляции.
+    public static SimulationResult simulate() {
+        init(); // Инициализация симуляции.
 
         // Изначально опрашиваем все источники, когда они готовы дать нам запрос.
         for (int i = 0; i < inputKit.getCount() && currentRequests < requiredRequests; i++) {
@@ -157,5 +158,10 @@ public class Simulator {
         simulationResult.setTotalSimulationTime(currentTime);
         simulationResult.calculateStatistics(inputKit, deviceKit);
         return simulationResult;
+    }
+
+    public static void generateFromProperties() {
+        config = Config.generateConfigFromProperties();
+        Simulator.simulationResult = Simulator.simulate();
     }
 }

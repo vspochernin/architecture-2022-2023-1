@@ -19,21 +19,15 @@ public class SimulationController {
     public ModelAndView getIndex() {
         ModelAndView mav = new ModelAndView("index");
 
-        Config config = null;
-        try {
-            config = Config.generateConfigFromProperties("src/main/resources" +
-                            "/input.properties");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        mav.addObject("config", config);
+        mav.addObject("config", Simulator.config);
 
         return mav;
     }
 
     @PostMapping("/simulate")
     public String simulate(@ModelAttribute Config config) {
-        Simulator.simulate(config);
+        Simulator.config = config;
+        Simulator.simulate();
         return "redirect:/";
     }
 
@@ -41,16 +35,11 @@ public class SimulationController {
     public ModelAndView getStepPage(@PathVariable Integer id) {
         ModelAndView mav = new ModelAndView("step-results");
 
-        // TODO: это временно.
-        try {
-            if (Simulator.simulationResult == null) {
-                Simulator.simulationResult = Simulator.simulate(Config.generateConfigFromProperties("src/main/resources" +
-                        "/input.properties"));
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (Simulator.simulationResult == null) {
+            Simulator.generateFromProperties();
         }
 
+        mav.addObject("stepnumber", id.toString());
         mav.addObject("description", Simulator.simulationResult.getSteps().get(id).getDescription());
         mav.addObject("calendar", Simulator.simulationResult.getSteps().get(id).getCalendarAndStateTableRows());
         mav.addObject("buffer", Simulator.simulationResult.getSteps().get(id).getBufferTableRows());
@@ -62,14 +51,8 @@ public class SimulationController {
     public ModelAndView getAutoPage() {
         ModelAndView mav = new ModelAndView("auto-results");
 
-        // TODO: это временно.
-        try {
-            if (Simulator.simulationResult == null) {
-                Simulator.simulationResult = Simulator.simulate(Config.generateConfigFromProperties("src/main/resources" +
-                        "/input.properties"));
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        if (Simulator.simulationResult == null) {
+            Simulator.generateFromProperties();
         }
 
         mav.addObject("inputs", Simulator.simulationResult.getInputCharacteristicTableRows());

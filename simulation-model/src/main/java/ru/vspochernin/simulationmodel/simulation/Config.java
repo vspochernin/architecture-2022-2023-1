@@ -12,6 +12,8 @@ import lombok.Setter;
 @Setter
 public class Config {
 
+    private static final String PROPERTIES_PATH = "src/main/resources/input.properties";
+
     public int inputCount; // Количество источников.
     public int bufferSize; // Размер буфера.
     public int deviceCount; // Количество приборов.
@@ -74,7 +76,11 @@ public class Config {
         return new Config(inputCount, bufferSize, deviceCount, requestCount, a, b, lambda);
     }
 
-    public static Config getEmptyConfig() {
-        return new Config();
+    public static Config generateConfigFromProperties() {
+        try {
+            return generateConfigFromProperties(PROPERTIES_PATH);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
