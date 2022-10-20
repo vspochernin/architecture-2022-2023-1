@@ -37,28 +37,28 @@ public class SimulationResult {
         // Заполнение таблицы календарь событий/текущее состояние.
         for (Input input : inputKit.getInputs()) {
             stepData.getCalendarAndStateTableRows().add(CalendarAndStateTableRow.builder()
-                            .event("I"+input.getInputNumber())
-                            .timeWhenHappen(input.getNextRequestGeneratedTime())
-                            .requestCount(input.getCountOfGeneratedRequests())
-                            .failureCount(input.getCountOfFailureRequests())
+                            .event("И"+input.getInputNumber())
+                            .timeWhenHappen(input.getNextRequestGeneratedTime() != -1 ? String.valueOf(input.getNextRequestGeneratedTime()) : "")
+                            .requestCount(input.getCountOfGeneratedRequests() != -1 ? String.valueOf(input.getCountOfGeneratedRequests()): "")
+                            .failureCount(input.getCountOfFailureRequests() != -1 ? String.valueOf(input.getCountOfFailureRequests()) : "")
                     .build());
         }
         for (Device device : deviceKit.getDevices()) {
             stepData.getCalendarAndStateTableRows().add(CalendarAndStateTableRow.builder()
-                            .event("D"+device.getDeviceNumber())
-                            .timeWhenHappen(device.getCurrentProcessedRequest() == null ? -1 : device.getTimeWhenProcessDone())
-                            .requestCount(device.getCurrentProcessedRequest() == null ? -1 : device.getCurrentProcessedRequest().getInputNumber())
-                            .failureCount(device.getCurrentProcessedRequest() == null ? -1 : device.getCurrentProcessedRequest().getRequestNumber())
+                            .event("Д"+device.getDeviceNumber())
+                            .timeWhenHappen(device.getCurrentProcessedRequest() == null ? "" : String.valueOf(device.getTimeWhenProcessDone()))
+                            .requestCount(device.getCurrentProcessedRequest() == null ? "" : String.valueOf(device.getCurrentProcessedRequest().getInputNumber()))
+                            .failureCount(device.getCurrentProcessedRequest() == null ? "" : String.valueOf(device.getCurrentProcessedRequest().getRequestNumber()))
                     .build());
         }
 
         // Заполнение таблицы буфер.
         for (BufferPlace bufferPlace : buffer.getBufferPlaces()) {
             stepData.getBufferTableRows().add(BufferTableRow.builder()
-                    .positionNumber(bufferPlace.getPositionNumber())
-                    .registrationTime(bufferPlace.getRegistrationTime())
-                    .inputNumber(bufferPlace.getStashedRequest() != null ? bufferPlace.getStashedRequest().getInputNumber() : -1)
-                    .requestNumber(bufferPlace.getStashedRequest() != null ? bufferPlace.getStashedRequest().getRequestNumber() : -1)
+                    .positionNumber(String.valueOf(bufferPlace.getPositionNumber()))
+                    .registrationTime(bufferPlace.getRegistrationTime() != -1 ? String.valueOf(bufferPlace.getRegistrationTime()) : "")
+                    .inputNumber(bufferPlace.getStashedRequest() != null ? String.valueOf(bufferPlace.getStashedRequest().getInputNumber()) : "")
+                    .requestNumber(bufferPlace.getStashedRequest() != null ? String.valueOf(bufferPlace.getStashedRequest().getRequestNumber()) : "")
                     .build());
         }
 
