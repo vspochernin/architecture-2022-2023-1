@@ -1,6 +1,5 @@
 package ru.vspochernin.simulationmodel.controller;
 
-import java.io.IOException;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +38,9 @@ public class SimulationController {
             Simulator.generateFromProperties();
         }
 
-        mav.addObject("stepnumber", id.toString());
+        mav.addObject("cur", id);
+        mav.addObject("prev", id != 0 ? id - 1 : 0);
+        mav.addObject("next", id != Simulator.simulationResult.getSteps().size() - 1 ? id + 1 : id);
         mav.addObject("description", Simulator.simulationResult.getSteps().get(id).getDescription());
         mav.addObject("calendar", Simulator.simulationResult.getSteps().get(id).getCalendarAndStateTableRows());
         mav.addObject("buffer", Simulator.simulationResult.getSteps().get(id).getBufferTableRows());

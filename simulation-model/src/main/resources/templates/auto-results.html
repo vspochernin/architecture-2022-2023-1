@@ -12,6 +12,13 @@
 <div class="container">
     <h1>Результаты автоматического режима</h1>
     <hr/>
+    <h2>Навигация</h2>
+    <hr/>
+    <div class="container">
+        <a th:href="@{/}" class="btn btn-primary">Главная</a>
+        <a th:href="@{/step/0}" class="btn btn-primary">Результаты пошагового режима</a>
+    </div>
+    <hr/>
     <h2>Характеристики источников ВС</h2>
     <hr/>
     <table class="table table-bordered table-striped">
@@ -56,10 +63,6 @@
         </tbody>
         </thead>
     </table>
-    <h2>Навигация</h2>
-    <hr/>
-    <a th:href="@{/}" class="btn btn-info">Главная</a>
-    <a th:href="@{/step/0}" class="btn btn-info">Результаты пошагового режима</a>
 </div>
 </body>
 </html>
