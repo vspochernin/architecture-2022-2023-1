@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ru.vspochernin.simulationmodel.data.DeviceCharacteristicTableRow;
+import ru.vspochernin.simulationmodel.data.InputCharacteristicTableRow;
 import ru.vspochernin.simulationmodel.simulation.Config;
 import ru.vspochernin.simulationmodel.simulation.Simulator;
 
@@ -22,6 +24,22 @@ public class SimulationController {
         mav.addObject("stepscount", Simulator.simulationResult != null ? Simulator.simulationResult.getStepsCount() : 0);
         mav.addObject("modeltime", Simulator.simulationResult != null ? Simulator.simulationResult.getModelingTime() : 0);
         mav.addObject("totaltime", Simulator.simulationResult != null ? Simulator.simulationResult.getTotalSimulationTime() : 0);
+
+        mav.addObject("avg_failure_prob", Simulator.simulationResult != null ?
+                Simulator.simulationResult.getInputCharacteristicTableRows().stream()
+                        .map(InputCharacteristicTableRow::getFailureProbability)
+                        .mapToDouble(Double::doubleValue)
+                        .average().getAsDouble() : 0);
+        mav.addObject("avg_stay_time", Simulator.simulationResult != null ?
+                Simulator.simulationResult.getInputCharacteristicTableRows().stream()
+                        .map(InputCharacteristicTableRow::getAvgStayTime)
+                        .mapToDouble(Double::doubleValue)
+                        .average().getAsDouble() : 0);
+        mav.addObject("avg_util_rate", Simulator.simulationResult != null ?
+                Simulator.simulationResult.getDeviceCharacteristicTableRows().stream()
+                        .map(DeviceCharacteristicTableRow::getUtilizationRate)
+                        .mapToDouble(Double::doubleValue)
+                        .average().getAsDouble() : 0);
 
         return mav;
     }

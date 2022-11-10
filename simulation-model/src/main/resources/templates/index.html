@@ -23,6 +23,10 @@
     <div th:text="'Время окончания моделирования' + ' ' + ${modeltime}"></div>
     <div th:text="'Общее время реализации' + ' ' + ${totaltime}"></div>
     <hr/>
+    <div th:text="'Средняя вероятность отказа в обслуживании заявки' + ' ' + ${avg_failure_prob}"></div>
+    <div th:text="'Среднее время пребывания заявки в СМО' + ' ' + ${avg_stay_time}"></div>
+    <div th:text="'Средний коэффициент использования прибора' + ' ' + ${avg_util_rate}"></div>
+    <hr/>
     <h2>Сконфигурирейте и запустите симуляцию</h2>
     <hr/>
     <form th:action="@{/simulate}" th:object="${config}" method="POST">
