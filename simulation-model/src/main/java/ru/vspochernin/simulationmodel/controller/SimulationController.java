@@ -35,6 +35,11 @@ public class SimulationController {
                         .map(InputCharacteristicTableRow::getAvgStayTime)
                         .mapToDouble(Double::doubleValue)
                         .average().getAsDouble() : 0);
+        mav.addObject("avg_buff_time", Simulator.simulationResult != null ?
+                Simulator.simulationResult.getInputCharacteristicTableRows().stream()
+                        .map(InputCharacteristicTableRow::getAvgBufferTime)
+                        .mapToDouble(Double::doubleValue)
+                        .average().getAsDouble() : 0);
         mav.addObject("avg_util_rate", Simulator.simulationResult != null ?
                 Simulator.simulationResult.getDeviceCharacteristicTableRows().stream()
                         .map(DeviceCharacteristicTableRow::getUtilizationRate)
