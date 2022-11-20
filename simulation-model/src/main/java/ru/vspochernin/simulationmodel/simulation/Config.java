@@ -26,7 +26,7 @@ public class Config {
 
     }
 
-    private Config(int inputCount, int bufferSize, int deviceCount, int requestCount, double a, double b,
+    public Config(int inputCount, int bufferSize, int deviceCount, int requestCount, double a, double b,
                   double lambda) {
         this.inputCount = inputCount;
         this.bufferSize = bufferSize;
